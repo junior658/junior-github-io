@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfólio de Fredson Lourenço</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: black;
+            color: white;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        /* Animação de escrita */
+        @keyframes typing {
+            from { width: 0; }
+            to { width: 100%; }
+        }
+
+        @keyframes blink-caret {
+            from, to { border-color: transparent; }
+            50% { border-color: white; }
+        }
+
+        .main-content h1, .main-content h2 {
+            border-right: 2px solid;
+            white-space: nowrap;
+            overflow: hidden;
+        }
+
+        .main-content h1 {
+            width: 0;
+            animation: typing 4s steps(30, end), blink-caret 0.75s step-end infinite;
+        }
+
+        .main-content h2 {
+            width: 0;
+            animation: typing 6s steps(40, end), blink-caret 0.75s step-end infinite;
+            animation-delay: 2s;
+        }
+
+        /* Navegação */
+        nav {
+            display: flex;
+            justify-content: center;
+            padding: 20px 0;
+            background-color: black;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 20px;
+        }
+
+        nav ul li {
+            font-size: 18px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: white;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+
+        nav ul li a:hover {
+            color: red;
+        }
+
+        /* Conteúdo Principal */
+        .main-content {
+            text-align: center;
+            position: relative;
+            padding-top: 50px;
+            flex: 1;
+        }
+
+        .main-content h1 {
+            font-size: 48px;
+            color: white;
+        }
+
+        .main-content h2 {
+            font-size: 36px;
+            color: red;
+        }
+
+        /* Círculo vermelho com imagem de perfil */
+        .circle {
+            position: absolute;
+            top: 20%;
+            right: 10%;
+            width: 300px;
+            height: 300px;
+            background-color: red;
+            border-radius: 50%;
+            z-index: 0;
+        }
+
+        .profile-pic {
+            position: absolute;
+            top: 20%;
+            right: 10%;
+            width: 300px;
+            height: 300px;
+            z-index: 1;
+            background: url('https://your-image-url.com') no-repeat center;
+            background-size: cover;
+            border-radius: 50%;
+        }
+
+        /* Botão "Hire me" */
+        .cta-btn {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: red;
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .cta-btn:hover {
+            background-color: #ff4d4d;
+        }
+
+        /* Redes sociais */
+        .social-icons {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .social-icons a img {
+            width: 40px;
+            height: 40px;
+            transition: transform 0.3s;
+        }
+
+        .social-icons a img:hover {
+            transform: scale(1.1);
+        }
+
+        /* Rodapé */
+        footer {
+            text-align: center;
+            padding: 10px 0;
+            background-color: #222;
+            color: white;
+        }
+
+        /* Seções de conteúdo */
+        .content-section {
+            display: none;
+            padding: 20px;
+            background-color: black;
+        }
+
+        .content-section.active {
+            display: block;
+        }
+
+        .content-section h3 {
+            color: red;
+        }
+
+        /* Links de navegação (botões) */
+        .tabs {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .tabs a {
+            background-color: red;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+
+        .tabs a:hover {
+            background-color: #ff4d4d;
+        }
+
+        /* Grelha para Portfólio */
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+        }
+
+        .portfolio-grid img {
+            width: 100%;
+            height: auto;
+            transition: transform 0.3s;
+        }
+
+        .portfolio-grid img:hover {
+            transform: scale(1.05);
+        }
+
+        /* Estilo das habilidades */
+        .skills-list li {
+            list-style: none;
+            margin-bottom: 10px;
+        }
+
+        .skills-list li span {
+            background-color: red;
+            display: inline-block;
+            height: 10px;
+            border-radius: 5px;
+        }
+
+        /* Idiomas */
+        table {
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        table th, table td {
+            padding: 10px;
+            border: 1px solid white;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navegação -->
+    <nav>
+        <ul>
+            <li><a href="#" onclick="showSection('home')">Início</a></li>
+            <li><a href="#" onclick="showSection('about')">Sobre Mim</a></li>
+            <li><a href="#" onclick="showSection('skills')">Habilidades</a></li>
+            <li><a href="#" onclick="showSection('portfolio')">Portfólio</a></li>
+            <li><a href="#" onclick="showSection('languages')">Idiomas</a></li>
+        </ul>
+    </nav>
+
+    <!-- Conteúdo Principal -->
+    <div id="home" class="main-content content-section active">
+        <h1>Oi, Eu sou Fredson Lourenço</h1>
+        <h2>Sou Desenvolvedor e Designer</h2>
+        <a href="#" class="cta-btn">Contrate-me</a>
+
+        <!-- Círculo vermelho e imagem de perfil -->
+        <div class="circle"></div>
+        <div class="profile-pic"></div>
+
+        <!-- Redes Sociais -->
+        <div class="social-icons">
+            <a href="https://www.instagram.com/fredson_lourenco?igsh=NTc4MTIwNjQ2YQ==" target="_blank">
+                <img src="https://cdn-icons-png.flaticon.com/512/733/733558.png" alt="Instagram">
+            </a>
+            <a href="https://www.facebook.com/profile.php?id=100077397433504" target="_blank">
+                <img src="https://cdn-icons-png.flaticon.com/512/733/733547.png" alt="Facebook">
+            </a>
+        </div>
+    </div>
+
+    <!-- Seção Sobre Mim -->
+    <div id="about" class="content-section">
+        <h3>Sobre Mim</h3>
+        <p>Eu sou Fredson Lourenço, um jovem de 18 anos, nascido em Maputo. Gosto muito de jogar futebol e meu jogador favorito é o Neymar. Atualmente, estudo no Instituto Técnico Comercial (ITC), onde estou no CV4. Tenho uma grande paixão por programação, e foi essa paixão que me levou a escolher este curso. Adoro criar e desenvolver soluções tecnológicas, unindo o que aprendo na sala de aula com a prática.</p>
+    </div>
+
+    <!-- Seção Habilidades -->
+    <div id="skills" class="content-section">
+        <h3>Habilidades</h3>
+        <ul class="skills-list">
+            <li>HTML <span style="width: 90%;"></span></li>
+            <li>CSS <span style="width: 80%;"></span></li>
+            <li>JavaScript <span style="width: 70%;"></span></li>
+            <li>Design Responsivo <span style="width: 85%;"></span></li>
+            <li>UX/UI <span style="width: 75%;"></span></li>
+        </ul>
+    </div>
+
+    <!-- Seção Portfólio -->
+    <div id="portfolio" class="content-section">
+        <h3>Portfólio</h3>
+        <p>Aqui estão alguns dos meus projetos mais recentes.</p>
+        <div class="portfolio-grid">
+            <!-- Onde adicionar as fotos -->
+            <img src="c:\Users\Nelson Martins\Downloads\baixados (7).jpeg" alt="Projeto 1">
+            <img src="c:\Users\Nelson Martins\Downloads\responsive-portfolio-main (1)\cool-responsive-portfolio-main\images\Imagem do WhatsApp de 2024-09-19 à(s) 09.46.47_062e7bea.jpg" alt="Projeto 2">
+            <img src="c:\Users\Nelson Martins\Downloads\responsive-portfolio-main (1)\cool-responsive-portfolio-main\images\Imagem do WhatsApp de 2024-09-19 à(s) 09.46.48_c53ec5bd.jpg" alt="Projeto 3">
+            <img src="c:\Users\Nelson Martins\Downloads\responsive-portfolio-main (1)\cool-responsive-portfolio-main\images\Imagem do WhatsApp de 2024-09-19 à(s) 09.46.46_9730d3da.jpg" alt="Projeto 4">
+            <img src="c:\Users\Nelson Martins\Downloads\responsive-portfolio-main (1)\cool-responsive-portfolio-main\images\Imagem do WhatsApp de 2024-09-19 à(s) 09.46.48_c231060a.jpg" alt="Projeto 5">
+            <img src="c:\Users\Nelson Martins\Downloads\responsive-portfolio-main (1)\cool-responsive-portfolio-main\images\portfolio1.jpg" alt="Projeto 6">
+        </div>
+    </div>
+
+    <!-- Seção Idiomas -->
+    <div id="languages" class="content-section">
+        <h3>Idiomas</h3>
+        <table>
+            <tr>
+                <th>Idioma</th>
+                <th>Proeficiência</th>
+            </tr>
+            <tr>
+                <td>Português</td>
+                <td>Nativo</td>
+            </tr>
+            <tr>
+                <td>Inglês</td>
+                <td>Fluente</td>
+            </tr>
+            <tr>
+                <td>Changana</td>
+                <td>Intermediário</td>
+            </tr>
+            <tr>
+                <td>Francês</td>
+                <td>Básico</td>
+            </tr>
+            <tr>
+                <td>Espanhol</td>
+                <td>Intermediário</td>
+            </tr>
+        </table>
+    </div>
+
+    <!-- Rodapé -->
+    <footer>
+        <p>&copy; 2024 Fredson Lourenço. Todos os direitos reservados.</p>
+    </footer>
+
+    <script>
+        function showSection(sectionId) {
+            const sections = document.querySelectorAll('.content-section');
+            sections.forEach(section => {
+                section.classList.remove('active');
+            });
+
+            document.getElementById(sectionId).classList.add('active');
+        }
+    </script>
+</body>
+</html>
